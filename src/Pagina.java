@@ -1,7 +1,7 @@
 // representa uma pagina da memoria virtual
 public class Pagina {
 	
-	private static int LIVRE = 0; // consts p facilitar o entendimento
+	private static int LIVRE = 0;
 	private static int OCUPADA = 1;
 
 	private int status; // indica se esta livre ou ocupada
