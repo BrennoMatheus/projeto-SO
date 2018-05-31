@@ -2,12 +2,10 @@
 public class Clock extends Thread {
 	int contador;
 	private Listener listener;
-	private MemoriaRAM memoria;
 	
-	public Clock(MemoriaRAM m) {
+	public Clock(Listener l) {
 		contador = 0;
-		listener = new Listener();
-		memoria = m;
+		listener = l;
 	}
 	
 	public void run() {
@@ -15,7 +13,7 @@ public class Clock extends Thread {
 		try {
 			while(true) {
 				contador++;
-				listener.notificar(memoria,contador);
+				listener.notificar(contador);
 				sleep(1000);
 			}
 		}

@@ -5,7 +5,9 @@ public class Main {
 		
 		MemoriaRAM memoriaR = new MemoriaRAM();
 		
-		Clock clock  = new Clock(memoriaR);
+		Listener listener = new Listener(memoriaR);
+		
+		Clock clock  = new Clock(listener);
 		
 		clock.start();
 		

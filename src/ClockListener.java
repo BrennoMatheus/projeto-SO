@@ -1,4 +1,4 @@
 
 public interface ClockListener {
-	public void notificar(MemoriaRAM m, int i);
+	public void notificar(int i);
 }
