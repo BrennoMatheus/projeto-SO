@@ -2,7 +2,7 @@
 public class MemoriaRAM {
 
 	private MolduraPagina listaCircular = null; // variavel vai ser usada p criar a lista circular de molduras de paginas
-	
+	private int clock;
 	
 	public MemoriaRAM() {
 		criaListaCircular(); // cria lista circular no construtor da memoria ram
@@ -33,5 +33,13 @@ public class MemoriaRAM {
 	
 	public MolduraPagina getLista() {
 		return this.listaCircular;
+	}
+	
+	public int getClock() {
+		return clock;
+	}
+	
+	public void setClock(int i) {
+		clock = i;
 	}
 }

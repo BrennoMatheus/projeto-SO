@@ -2,13 +2,16 @@
 public class Main {
 	
 	public static void main(String[]args) {
-		String s = "4-R,5-R,0-R,4-W-2";
 		
-		Main.leituraInstrucoes(s);
+		MemoriaRAM memoriaR = new MemoriaRAM();
 		
-		Clock clock  = new Clock();
+		Clock clock  = new Clock(memoriaR);
 		
 		clock.start();
+		
+		while(true) {
+			System.out.println(memoriaR.getClock());
+		}
 		
 	}
 	
