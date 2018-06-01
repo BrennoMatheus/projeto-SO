@@ -1,23 +1,32 @@
 
 public class MemoriaVirtual {
 	
-	private Pagina[] memoriaVirtual; // array de paginas 
+	private PaginaVirtual[] memoriaVirtual; // array de paginas 
 	
 	public MemoriaVirtual() {
-		memoriaVirtual = new Pagina[16]; // instancia as paginas
+		memoriaVirtual = new PaginaVirtual[16]; // instancia as paginas
 	}
 	
+	public PaginaVirtual getPagina(int indice) {
+		return memoriaVirtual[indice];
+	}
 	
-	private int buscarPaginaLivre() {
-		for(int i = 0; i < memoriaVirtual.length; i++) { // percorre as paginas da memoria virtual
-			if(memoriaVirtual[i].getStatus()) { // getStatus retorna true ou false
-				return i;	// retorna uma posição q estiver livre
-			}
+	public boolean paginaPresente(int indice) {
+		if(memoriaVirtual[indice].presente()) {
+			return true;
 		}
-		return -1; //se n achar paginas livres na memoria virtual
+		else {
+			return false;
+		}
 	}
 	
-	
-	
-	
+	public boolean paginaLivre(int endereco) {
+		if(memoriaVirtual[endereco].protegida()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 }
