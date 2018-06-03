@@ -28,10 +28,12 @@ public class SO {
 		gerenciadorMemoria.escrita(endereco, valor);
 	}
 	
-	public int leitura(String s) {
+	public void leitura(String s) {
 		String[] instrucao = s.split("-");
 		int endereco = Integer.parseInt(instrucao[0]);
 		
-		return gerenciadorMemoria.leitura(endereco);	
+		int valor =  gerenciadorMemoria.leitura(endereco);
+		
+		System.out.println("o valor lido do endereço "+instrucao[0]+" é "+ valor);	
 	}
 }

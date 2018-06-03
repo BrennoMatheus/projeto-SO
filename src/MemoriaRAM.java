@@ -1,11 +1,13 @@
 
 public class MemoriaRAM {
 
-	private PaginaFisica[] memoriaRam = null; 
+	private PaginaFisica[] memoriaRam = new PaginaFisica[8]; 
 	private int clock;
 	
 	public MemoriaRAM() {
-		memoriaRam = new PaginaFisica[8];
+		for(int i = 0; i < 8; i++){
+			memoriaRam[i] = new PaginaFisica(i);
+		}
 	}
 	
 	public int getConteudo(int i) {

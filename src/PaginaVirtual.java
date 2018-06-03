@@ -22,6 +22,10 @@ public class PaginaVirtual {
 		return protegida;
 	}
 	
+	public void setPresente(boolean b) {
+		presente = b;
+	}
+	
 	public void setProtegida(boolean b) {
 		protegida = b;
 	}

@@ -35,6 +35,7 @@ public class MMU {
 			paginaV.setReferenciada(true); 
 			paginaV.setModificada(true);
 			paginaV.setProtegida(true);
+			paginaV.setPresente(true);
 		}
 		else {
 			// n sei ainda cmo proceder nesse caso
