@@ -2,27 +2,17 @@
 public class MemoriaRAM {
 
 	private PaginaFisica[] memoriaRam = new PaginaFisica[8]; 
-	private int clock;
+	private int[] enderecos;
 	
-	public MemoriaRAM() {
-		for(int i = 0; i < 8; i++){
-			memoriaRam[i] = new PaginaFisica(i);
-		}
+	public MemoriaRAM(int tamanho) {
+		enderecos = new int[tamanho];
 	}
 	
 	public int getConteudo(int i) {
-		return memoriaRam[i].getConteudo();
-	}
-	
-	public int getClock() {
-		return clock;
-	}
-	
-	public void setClock(int i) {
-		clock = i;
-	}
+		return enderecos[i];
+	}	
 	
 	public void setConteudo(int endereco, int conteudo) {
-		memoriaRam[endereco].setConteudo(conteudo);
+		enderecos[endereco] = conteudo;
 	}
 }

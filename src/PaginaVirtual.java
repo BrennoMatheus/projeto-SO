@@ -2,6 +2,7 @@
 public class PaginaVirtual {
 
 	private int paginaFisica;
+	private int clock;
 	
 	private boolean presente;
 	private boolean modificada;
@@ -44,6 +45,14 @@ public class PaginaVirtual {
 	
 	public boolean presente() {
 		return presente;
+	}
+	
+	public int getClock() {
+		return clock;
+	}
+	
+	public void setClock(int i) {
+		clock = i;
 	}
 	
 }
