@@ -1,8 +1,9 @@
+
 public class PaginaFisica {
 	
 	private int conteudo;	
 	
-	public PaginaFisica(int i) {
+	public PaginaFisica() {
 		conteudo = 0;
 	}
 	

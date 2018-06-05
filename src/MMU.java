@@ -28,18 +28,40 @@ public class MMU {
 	public void escrita(int endereco, int valor) {
 		if(memoriaV.paginaLivre(endereco)) { // se a pagina estiver livre p escrita
 			
-			PaginaVirtual paginaV = memoriaV.getPagina(endereco);
-			int enderecoF = paginaV.getIndicePaginaFisica();
-			memoriaR.setConteudo(enderecoF, valor);
+			int enderecoLivre = buscarEnderecoLivre();
 			
-			paginaV.setReferenciada(true); 
-			paginaV.setModificada(true);
-			paginaV.setProtegida(true);
-			paginaV.setPresente(true);
+			if(enderecoLivre == -1) { // -1 significa q n achou endereços livres
+				return; // chama algoritmo de substituição
+			}
+			else {
+				
+				memoriaR.instanciarPagina(enderecoLivre); // verificar se dá p melhorar essa verificação	
+				memoriaV.getPagina(endereco).setIndicePaginaFisica(enderecoLivre);
+				memoriaR.setConteudo(enderecoLivre, valor);
+				
+				memoriaV.getPagina(endereco).setReferenciada(true); 
+				memoriaV.getPagina(endereco).setModificada(true);
+				memoriaV.getPagina(endereco).setProtegida(true);
+				memoriaV.getPagina(endereco).setPresente(true);
+			}
+			
+			
 		}
 		else {
 			// n sei ainda cmo proceder nesse caso
 		}
+	}
+	
+	private int buscarEnderecoLivre() {
+		PaginaFisica[] copia = memoriaR.getMemoriaRam();
+		int enderecoLivre = -1;
+		
+		for(int i = 0; i < copia.length; i++) {
+			if(copia[i] == null) {
+				enderecoLivre = i;
+			}
+		}
+		return enderecoLivre;
 	}
 	
 

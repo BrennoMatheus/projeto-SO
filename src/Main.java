@@ -3,7 +3,7 @@ public class Main {
 	
 	public static void main(String[]args) {
 		
-		MemoriaRAM memoriaR = new MemoriaRAM(8);
+		MemoriaRAM memoriaR = new MemoriaRAM();
 		MemoriaVirtual memoriaV = new MemoriaVirtual();
 		Listener listener = new Listener(memoriaV);
 		Clock clock  = new Clock(listener);

@@ -39,6 +39,10 @@ public class PaginaVirtual {
 		referenciada  = b;
 	}
 	
+	public void setIndicePaginaFisica(int endereco) {
+		paginaFisica = endereco;
+	}
+	
 	public int getIndicePaginaFisica() {
 		return paginaFisica;
 	}

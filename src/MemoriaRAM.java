@@ -1,18 +1,22 @@
 
 public class MemoriaRAM {
 
-	private PaginaFisica[] memoriaRam = new PaginaFisica[8]; 
-	private int[] enderecos;
+	private PaginaFisica[] memoriaRam = new PaginaFisica[8];
 	
-	public MemoriaRAM(int tamanho) {
-		enderecos = new int[tamanho];
-	}
 	
 	public int getConteudo(int i) {
-		return enderecos[i];
+		return memoriaRam[i].getConteudo();
 	}	
 	
 	public void setConteudo(int endereco, int conteudo) {
-		enderecos[endereco] = conteudo;
+		 memoriaRam[endereco].setConteudo(conteudo);
+	}
+	
+	public PaginaFisica[] getMemoriaRam() {
+		return memoriaRam;
+	}
+	
+	public void instanciarPagina(int endereco) {
+		memoriaRam[endereco] = new PaginaFisica();
 	}
 }
