@@ -28,7 +28,7 @@ public class MMU {
 	public void escrita(int endereco, int valor) {
 		if(memoriaV.paginaLivre(endereco)) { // se a pagina estiver livre p escrita
 			
-			int enderecoLivre = buscarEnderecoLivre();
+			int enderecoLivre = buscarEnderecoLivre(); // verificar pq q esta iniciando pela posicao final
 			
 			if(enderecoLivre == -1) { // -1 significa q n achou endereços livres
 				return; // chama algoritmo de substituição
@@ -45,6 +45,15 @@ public class MMU {
 				memoriaV.getPagina(endereco).setPresente(true);
 			}
 			
+			// apenas p visualizar o resultado da função
+			System.out.println("endereco pagina virtual: "+ endereco +
+								"\n endereco pagina fisica "+ enderecoLivre + 
+								"\n protegida: "+ memoriaV.getPagina(endereco).protegida() +
+								"\n modificada: "+ memoriaV.getPagina(endereco).modificada() +
+								"\n referenciada: "+ memoriaV.getPagina(endereco).referenciada() +
+								"\n presente: "+ memoriaV.getPagina(endereco).presente()
+					
+			);
 			
 		}
 		else {

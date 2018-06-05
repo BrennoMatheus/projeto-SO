@@ -19,6 +19,14 @@ public class PaginaVirtual {
 		protegida = false;
 	}
 	
+	public boolean modificada() {
+		return modificada;
+	}
+	
+	public boolean referenciada() {
+		return referenciada;
+	}
+	
 	public boolean protegida() {
 		return protegida;
 	}
