@@ -2,21 +2,27 @@
 public class PaginaVirtual {
 
 	private int paginaFisica;
-	private int clock;
+	private int ultimaReferencia;
 	
 	private boolean presente;
 	private boolean modificada;
 	private boolean referenciada;
-	private boolean protegida;
 	
 	
-	public PaginaVirtual(int indice) {
+	public PaginaVirtual() {
 		paginaFisica = 0;
 		
 		presente = false;
 		modificada = false;
 		referenciada = false;
-		protegida = false;
+	}
+	
+	public void setUltimaReferencia(int i){
+		ultimaReferencia = i;
+	}
+	
+	public int getUltimaReferencia(){
+		return ultimaReferencia;
 	}
 	
 	public boolean modificada() {
@@ -27,16 +33,9 @@ public class PaginaVirtual {
 		return referenciada;
 	}
 	
-	public boolean protegida() {
-		return protegida;
-	}
 	
 	public void setPresente(boolean b) {
 		presente = b;
-	}
-	
-	public void setProtegida(boolean b) {
-		protegida = b;
 	}
 	
 	public void setModificada(boolean b) {
@@ -57,14 +56,6 @@ public class PaginaVirtual {
 	
 	public boolean presente() {
 		return presente;
-	}
-	
-	public int getClock() {
-		return clock;
-	}
-	
-	public void setClock(int i) {
-		clock = i;
 	}
 	
 }

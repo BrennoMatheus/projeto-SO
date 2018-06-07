@@ -1,11 +1,13 @@
 
 public class Listener implements ClockListener {
 
-	private MemoriaVirtual memoria;
+	private MMU gerenciador;
 	
-	public Listener(MemoriaVirtual v) {
-		memoria = v;
+	public Listener(MMU mmu) {
+		gerenciador = mmu;
 	}
-	public void notificar(int i) {}
+	public void notificar(int i) {
+		gerenciador.setClock(i);
+	}
 
 }

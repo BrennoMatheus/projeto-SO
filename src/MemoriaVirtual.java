@@ -5,8 +5,12 @@ public class MemoriaVirtual {
 	
 	public MemoriaVirtual() {
 		for(int i = 0; i < 16; i++) { // instancia as paginas
-			memoriaVirtual[i] = new PaginaVirtual(i);
+			memoriaVirtual[i] = new PaginaVirtual();
 		}
+	}
+	
+	public PaginaVirtual[] getMemoriaVirtual(){
+		return memoriaVirtual;
 	}
 	
 	public PaginaVirtual getPagina(int indice) {
@@ -22,13 +26,4 @@ public class MemoriaVirtual {
 		}
 	}
 	
-	public boolean paginaLivre(int endereco) {
-		if(memoriaVirtual[endereco].protegida()) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
 }

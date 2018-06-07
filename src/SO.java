@@ -3,8 +3,8 @@ public class SO {
 	
 	private MMU gerenciadorMemoria;
 	
-	public SO(MemoriaRAM mr, MemoriaVirtual mv ){
-		gerenciadorMemoria = new MMU(mr,mv);
+	public SO(MMU g ){
+		gerenciadorMemoria = g;
 	}
 	
 	public void leituraInstrucoes(String s){

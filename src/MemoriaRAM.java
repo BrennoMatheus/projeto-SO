@@ -16,6 +16,10 @@ public class MemoriaRAM {
 		return memoriaRam;
 	}
 	
+	public void liberarPagina(int i){
+		memoriaRam[i] = null;
+	}
+	
 	public void instanciarPagina(int endereco) {
 		memoriaRam[endereco] = new PaginaFisica();
 	}
