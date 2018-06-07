@@ -4,8 +4,8 @@ public class ControleConcorrencia implements InterfaceControle {
 	private MMU gerenciadorMemoria;
 	
 	
-	public ControleConcorrencia(MemoriaRAM mr, MemoriaVirtual mv){
-		gerenciadorMemoria = new MMU(mr,mv);
+	public ControleConcorrencia(MemoriaRAM mr, MemoriaVirtual mv, HD hd){
+		gerenciadorMemoria = new MMU(mr,mv,hd);
 	}
 
 	
