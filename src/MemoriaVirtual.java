@@ -3,12 +3,6 @@ public class MemoriaVirtual {
 	
 	private PaginaVirtual[] memoriaVirtual = new PaginaVirtual[16]; // array de paginas 
 	
-	public MemoriaVirtual() {
-		for(int i = 0; i < 16; i++) { // instancia as paginas
-			memoriaVirtual[i] = new PaginaVirtual();
-		}
-	}
-	
 	public PaginaVirtual[] getMemoriaVirtual(){
 		return memoriaVirtual;
 	}
@@ -24,6 +18,10 @@ public class MemoriaVirtual {
 		else {
 			return false;
 		}
+	}
+	
+	public void instanciarPagina(int i) {
+		memoriaVirtual[i] = new PaginaVirtual();
 	}
 	
 }
