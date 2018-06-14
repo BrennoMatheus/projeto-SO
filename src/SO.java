@@ -10,6 +10,10 @@ public class SO {
 		instrucoes = new ArrayList<String>();
 	}
 	
+	public int quantidadeInstrucoes(){ // metodo de teste
+		return instrucoes.size();
+	}
+	
 	public void leituraInstrucoes(String s){
 		 String[] arrayInstrucoes = s.split(",");
 		 inserePilhaInstrucoes(arrayInstrucoes);

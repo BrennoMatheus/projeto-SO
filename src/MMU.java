@@ -87,22 +87,14 @@ public class MMU {
 		int endereco;
 		
 		endereco = verificarPaginas();
-		
-		try {
-				
-			System.out.println("verificacao de paginas retornou: "+endereco);
+	
+		System.out.println("verificacao de paginas retornou: "+endereco);
 			
-			while(endereco == -1){ // enquanto não retornar um endereco livre vai percorrer a memoria verificando
-				System.out.println("nao foi achada pagina livre, verificando novamente...");
-				endereco = verificarPaginas();
-				Thread.sleep(1000);
-			}
+		while(endereco == -1){ // enquanto não retornar um endereco livre vai percorrer a memoria verificando
+			System.out.println("nao foi achada pagina livre, verificando novamente...");
+			endereco = verificarPaginas();
 		}
-		catch(Exception e) {
-			
-		}
-		
-		
+	
 		System.out.println("pagina livre encontrada: "+endereco);
 		return endereco; // retorna o endereco liberado		
 	}
@@ -111,69 +103,68 @@ public class MMU {
 		int endereco = -1; // valor por padrão é -1 p a função q chamar saber se foi liberado algum endereco
 		int idade;
 		
-		int tamanhoAtualMv = 0;
 		
+		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++){ //  percorre todas as paginas da memoria virtual q foram instanciadas
+			
+			if(memoriaV.existe(i)){
+				idade = clock - memoriaV.getPagina(i).getUltimaReferencia();
+				
+				System.out.println("verificando pagina "+i+" da memoria virtual");
+				System.out.println("idade da pagina "+i+": "+idade);
+				
+				if(memoriaV.getPagina(i).referenciada()){ // se aquela pagina foi referenciada naquele ciclo de clock
+					memoriaV.getPagina(i).setUltimaReferencia(clock);	//inserir na pagina clock atual
 		
-		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++ ) { // verifica as paginas da memoria q estão sendo usadas
-			if(memoriaV.getPagina(i) != null) {
-				tamanhoAtualMv++;
+					System.out.println("pagina "+i+" foi referenciada recentemente...");
+					System.out.println("atualizando tempo da ultima referencia para "+memoriaV.getPagina(i).getUltimaReferencia());
+					
+				}
+				else if(!memoriaV.getPagina(i).referenciada() && !memoriaV.getPagina(i).modificada() && idade > TEMPO_LIMITE){ // se não foi referenciada e a idade ultrapassou o limite estabelecido
+					
+					System.out.println("pagina "+i+" não foi referenciada ultimamente e sua idade ultrapassou o tempo limite");
+					
+					endereco = memoriaV.getPagina(i).getIndicePaginaFisica(); // pega o endereco fisico q a memoria virtual esta mapeando
+					int conteudo = memoriaR.getConteudo(endereco); // busca o conteudo na ram naquele endereco
+					
+					System.out.println("endereco fisico mapeado na pagina virtual "+i+" é: "+endereco+" e armazena o valor: "+conteudo);
+					
+					memoriaR.liberarPagina(endereco); // libera aquele endereco na ram
+					
+					System.out.println("espaco liberado na ram no endereco: "+endereco);
+					
+					memoriaV.getPagina(i).setPresente(false); // avisa a pagina q mapeia aquele endereco q o dado não está mais presente
+					
+					System.out.println("informando pagina virtual a ausencia do dado na ram");
+					
+					hd.inserir(i, conteudo); // transfere o dado p o hd
+					
+					System.out.println("valor transferido ao hd");
+					
+					break;
+				}
+		
 			}
+			
 		}
-		
-		for(int i = 0; i < tamanhoAtualMv; i++){ //  percorre todas as paginas da memoria virtual q foram instanciadas
 			
-			System.out.println("verificando pagina "+i+" da memoria virtual");
-			
-			idade = clock - memoriaV.getPagina(i).getUltimaReferencia();
-			
-			System.out.println("idade da pagina "+i+": "+idade);
-			
-			if(memoriaV.getPagina(i).referenciada()){ // se aquela pagina foi referenciada naquele ciclo de clock
-				memoriaV.getPagina(i).setUltimaReferencia(clock);	//inserir na pagina clock atual
-	
-				System.out.println("pagina "+i+" foi referenciada recentemente...");
-				System.out.println("atualizando tempo da ultima referencia para "+memoriaV.getPagina(i).getUltimaReferencia());
-				
-			}
-			else if(!memoriaV.getPagina(i).referenciada() && !memoriaV.getPagina(i).modificada() && idade > TEMPO_LIMITE){ // se não foi referenciada e a idade ultrapassou o limite estabelecido
-				
-				System.out.println("pagina "+i+" não foi referenciada ultimamente e sua idade ultrapassou o tempo limite");
-				
-				endereco = memoriaV.getPagina(i).getIndicePaginaFisica(); // pega o endereco fisico q a memoria virtual esta mapeando
-				int conteudo = memoriaR.getConteudo(endereco); // busca o conteudo na ram naquele endereco
-				
-				System.out.println("endereco fisico mapeado na pagina virtual "+i+" é: "+endereco+" e armazena o valor: "+conteudo);
-				
-				memoriaR.liberarPagina(endereco); // libera aquele endereco na ram
-				
-				System.out.println("espaco liberado na ram no endereco: "+endereco);
-				
-				memoriaV.getPagina(i).setPresente(false); // avisa a pagina q mapeia aquele endereco q o dado não está mais presente
-				
-				System.out.println("informando pagina virtual a ausencia do dado na ram");
-				
-				hd.inserir(i, conteudo); // transfere o dado p o hd
-				
-				System.out.println("valor transferido ao hd");
-			}
-	
-		}
 		System.out.println("retornando o endereco liberado: "+endereco);
 		return endereco; // retorna o endereco da ram liberado
+			
 	}
 	
 	public void reiniciarBitR() {
-		
-		int tamanhoAtualMv = 0;
-
-		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++ ) { // verifica as paginas da memoria q estão sendo usadas
-			if(memoriaV.getPagina(i) != null) {
-				tamanhoAtualMv++;
+		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++ ) {
+			if(memoriaV.existe(i)){
+				memoriaV.getPagina(i).setReferenciada(false);
 			}
 		}
-		
-		for(int i = 0; i < tamanhoAtualMv; i++ ) {
-			memoriaV.getPagina(i).setReferenciada(false);
+	}
+	
+	public void reiniciarBitM(){
+		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++ ) {
+			if(memoriaV.existe(i)){
+				memoriaV.getPagina(i).setModificada(false);
+			}
 		}
 	}
 	

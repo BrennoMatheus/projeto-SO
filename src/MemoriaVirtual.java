@@ -24,4 +24,13 @@ public class MemoriaVirtual {
 		memoriaVirtual[i] = new PaginaVirtual();
 	}
 	
+	public boolean existe(int i){
+		if(memoriaVirtual[i] != null){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 }
