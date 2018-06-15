@@ -2,7 +2,7 @@
 public class PaginaVirtual {
 
 	private int paginaFisica;
-	private int ultimaReferencia;
+	private long ultimaReferencia;
 	
 	private boolean presente;
 	private boolean modificada;
@@ -17,11 +17,11 @@ public class PaginaVirtual {
 		referenciada = false;
 	}
 	
-	public void setUltimaReferencia(int i){
+	public void setUltimaReferencia(long i){
 		ultimaReferencia = i;
 	}
 	
-	public int getUltimaReferencia(){
+	public long getUltimaReferencia(){
 		return ultimaReferencia;
 	}
 	

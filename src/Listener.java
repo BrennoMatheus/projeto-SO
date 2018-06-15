@@ -8,10 +8,11 @@ public class Listener implements ClockListener {
 		gerenciador = mmu;
 		sistemaOperacional = so;
 	}
-	public void notificar(int i) {
+	public void notificar(long i) {
 		gerenciador.setClock(i);
 		gerenciador.reiniciarBitR();
 		gerenciador.reiniciarBitM();
 	}
+
 
 }

@@ -1,6 +1,6 @@
 
 public class Clock extends Thread {
-	int contador;
+	long contador;
 	private Listener listener;
 	
 	public Clock(Listener l) {

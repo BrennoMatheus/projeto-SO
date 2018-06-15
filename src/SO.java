@@ -34,13 +34,17 @@ public class SO {
 	
 	public void execute() {
 		String instrucao = retiraPilhaInstrucoes();
-		if(instrucao.length() > 3) {
+		
+		int tipoInstrucao = instrucao.indexOf('R');
+		
+		if(tipoInstrucao == -1) {
 			escrita(instrucao);
 		}
 		else {
 			leitura(instrucao);
 		}
 	}
+	
 	
 	public void escrita(String s) {
 		String[] instrucao = s.split("-");

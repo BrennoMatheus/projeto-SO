@@ -5,7 +5,7 @@ public class MMU {
 	private MemoriaRAM memoriaR;
 	private MemoriaVirtual memoriaV;
 	private HD hd;
-	private int clock;
+	private long clock;
 	private final int TEMPO_LIMITE = 5;
 	
 	public MMU(MemoriaRAM mr, MemoriaVirtual mv, HD h) {
@@ -14,11 +14,11 @@ public class MMU {
 		hd = h;
 	}
 	
-	public int getClock() {
+	public long getClock() {
 		return clock;
 	}
 	
-	public void setClock(int i) {
+	public void setClock(long i) {
 		clock = i;
 	}
 	
@@ -42,7 +42,7 @@ public class MMU {
 			System.out.println("endereco fisico mapeado pela memoria virtual não encontra-se na ram");
 			System.out.println("iniciando algoritmo de substituição...");
 			
-			int enderecoLiberado = substituicao(); // libera um endereco da ram atraves do algoritmo
+			int enderecoLiberado = substituicao(endereco); // libera um endereco da ram atraves do algoritmo
 			
 			System.out.println("endereco fisico liberado: "+enderecoLiberado);
 			
@@ -68,7 +68,7 @@ public class MMU {
 			
 			System.out.println("não foi encontrada pagina livre, iniciar algoritmo de substituicao...");
 			
-			int enderecoLiberado = substituicao();	// chama algoritmo de substituição
+			int enderecoLiberado = substituicao(endereco);	// chama algoritmo de substituição
 			
 			System.out.println("endereco livre encontrado: "+enderecoLiberado);
 			System.out.println("inserindo: "+valor+" no endereco "+enderecoLiberado);
@@ -83,25 +83,25 @@ public class MMU {
 		}
 	}
 	
-	private int substituicao(){
+	private int substituicao(int enderecoV){
 		int endereco;
 		
-		endereco = verificarPaginas();
+		endereco = verificarPaginas(enderecoV);
 	
 		System.out.println("verificacao de paginas retornou: "+endereco);
 			
 		while(endereco == -1){ // enquanto não retornar um endereco livre vai percorrer a memoria verificando
 			System.out.println("nao foi achada pagina livre, verificando novamente...");
-			endereco = verificarPaginas();
+			endereco = verificarPaginas(enderecoV);
 		}
 	
 		System.out.println("pagina livre encontrada: "+endereco);
 		return endereco; // retorna o endereco liberado		
 	}
 	
-	private int verificarPaginas(){
+	private int verificarPaginas(int enderecoV){
 		int endereco = -1; // valor por padrão é -1 p a função q chamar saber se foi liberado algum endereco
-		int idade;
+		long idade;
 		
 		
 		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++){ //  percorre todas as paginas da memoria virtual q foram instanciadas
@@ -136,7 +136,7 @@ public class MMU {
 					
 					System.out.println("informando pagina virtual a ausencia do dado na ram");
 					
-					hd.inserir(i, conteudo); // transfere o dado p o hd
+					hd.inserir(enderecoV, conteudo); // transfere o dado p o hd
 					
 					System.out.println("valor transferido ao hd");
 					
