@@ -22,6 +22,9 @@ public class Main {
 				cont++;
 				Thread.sleep(500);
 			}
+			
+			String a = "asdasdh";
+			a ="asdasdfa";
 		}
 		catch(Exception e){
 			e.getMessage();

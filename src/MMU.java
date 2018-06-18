@@ -106,7 +106,7 @@ public class MMU {
 		
 		for(int i = 0; i < memoriaV.getMemoriaVirtual().length; i++){ //  percorre todas as paginas da memoria virtual q foram instanciadas
 			
-			if(memoriaV.existe(i)){
+			if(memoriaV.existe(i) && memoriaV.paginaPresente(i)){
 				idade = clock - memoriaV.getPagina(i).getUltimaReferencia();
 				
 				System.out.println("verificando pagina "+i+" da memoria virtual");
@@ -136,7 +136,7 @@ public class MMU {
 					
 					System.out.println("informando pagina virtual a ausencia do dado na ram");
 					
-					hd.inserir(enderecoV, conteudo); // transfere o dado p o hd
+					hd.inserir(i, conteudo); // transfere o dado p o hd
 					
 					System.out.println("valor transferido ao hd");
 					
@@ -183,7 +183,7 @@ public class MMU {
 	
 	private void inserirPagina(int enderecoFisico,int valor,int enderecoVirtual){
 		memoriaR.instanciarPagina(enderecoFisico);
-		memoriaV.instanciarPagina(enderecoVirtual);
+ 		memoriaV.instanciarPagina(enderecoVirtual);
 		memoriaV.getPagina(enderecoVirtual).setIndicePaginaFisica(enderecoFisico);
 		memoriaR.setConteudo(enderecoFisico, valor);
 		
