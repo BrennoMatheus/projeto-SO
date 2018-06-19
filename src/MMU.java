@@ -26,6 +26,10 @@ public class MMU {
 		
 		System.out.println("ler o valor do endereco: "+endereco+" da memoria virtual");
 		
+		if(memoriaV.getPagina(endereco) == null) {
+			return -99999;
+		}
+		
 		if(memoriaV.paginaPresente(endereco)) { // se a pagina buscada tiver o bit de presença verdadeiro
 			
 			System.out.println("endereco fisico mapeado pela memoria virtual encontra-se na ram");
@@ -46,7 +50,10 @@ public class MMU {
 			
 			System.out.println("endereco fisico liberado: "+enderecoLiberado);
 			
+			memoriaR.instanciarPagina(enderecoLiberado);
+			
 			memoriaR.setConteudo(enderecoLiberado, hd.getConteudo(endereco)); // transfere o dado do hd para a memoria ram
+			
 			memoriaV.getPagina(endereco).setPresente(true); // avisa a memoria virtual q o dado q ela mapeia está presente na ram
 			
 			System.out.println("conteudo transferido do hd para a ram");
@@ -187,6 +194,7 @@ public class MMU {
 		memoriaV.getPagina(enderecoVirtual).setIndicePaginaFisica(enderecoFisico);
 		memoriaR.setConteudo(enderecoFisico, valor);
 		
+		memoriaV.getPagina(enderecoVirtual).setUltimaReferencia(clock);
 		memoriaV.getPagina(enderecoVirtual).setReferenciada(true); 
 		memoriaV.getPagina(enderecoVirtual).setModificada(true);
 		memoriaV.getPagina(enderecoVirtual).setPresente(true);

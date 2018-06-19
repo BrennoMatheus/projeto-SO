@@ -14,7 +14,7 @@ public class Clock extends Thread {
 			while(true) {
 				contador++;
 				listener.notificar(contador);
-				sleep(1000);
+				sleep(500);
 			}
 		}
 		catch(Exception e) {

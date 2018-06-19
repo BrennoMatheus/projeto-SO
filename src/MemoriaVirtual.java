@@ -1,7 +1,11 @@
 
 public class MemoriaVirtual {
 	
-	private PaginaVirtual[] memoriaVirtual = new PaginaVirtual[16]; // array de paginas 
+	private PaginaVirtual[] memoriaVirtual; // array de paginas 
+	
+	public MemoriaVirtual(int tamanho) {
+		memoriaVirtual = new PaginaVirtual[tamanho];
+	}
 	
 	public PaginaVirtual[] getMemoriaVirtual(){
 		return memoriaVirtual;

@@ -60,6 +60,11 @@ public class SO {
 		
 		int valor =  gerenciadorMemoria.leitura(endereco);
 		
-		System.out.println("o valor lido do endereço "+instrucao[0]+" é "+ valor);	
+		if(valor == -99999) {
+			System.out.println("o valor lido do endereço "+instrucao[0]+" é "+ "null");
+		}
+		else {
+			System.out.println("o valor lido do endereço "+instrucao[0]+" é "+ valor);
+		}	
 	}
 }
