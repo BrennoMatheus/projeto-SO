@@ -3,36 +3,46 @@ import java.util.ArrayList;
 public class SO {
 	
 	private MMU gerenciadorMemoria;
-	private ArrayList<String> instrucoes;
+	private int tamanhoMemoriaVirtual;
+	private int quantidadeThreads;
 	
-	public SO(MMU g ){
+	public SO(MMU g, int tamanhoMemoriaVirtual, int quantidadeThreads){
 		gerenciadorMemoria = g;
-		instrucoes = new ArrayList<String>();
+		this.tamanhoMemoriaVirtual = tamanhoMemoriaVirtual;
+		this.quantidadeThreads = quantidadeThreads;
 	}
 	
-	public int quantidadeInstrucoes(){ // metodo de teste
-		return instrucoes.size();
-	}
-	
-	public void leituraInstrucoes(String s){
-		 String[] arrayInstrucoes = s.split(",");
-		 inserePilhaInstrucoes(arrayInstrucoes);
-	}
-	
-	public void inserePilhaInstrucoes(String[] instrucoes) {
-		for(String instrucao : instrucoes) {
-			this.instrucoes.add(instrucao);
+	public void iniciarProcessos() {
+		int posicaoInicial;
+		for(int i = 0; i < quantidadeThreads; i++) {
+			posicaoInicial = i*(tamanhoMemoriaVirtual/quantidadeThreads);
+			new Processo(gerenciadorMemoria, tamanhoMemoriaVirtual, quantidadeThreads,posicaoInicial,i).start();
 		}
 	}
 	
-	public String retiraPilhaInstrucoes() {
+	/*public int quantidadeInstrucoes(){ // metodo de teste
+		return instrucoes.size();
+	}*/
+	
+	/*public void leituraInstrucoes(String s){
+		 String[] arrayInstrucoes = s.split(",");
+		 inserePilhaInstrucoes(arrayInstrucoes);
+	}*/
+	
+	/*public void inserePilhaInstrucoes(String[] instrucoes) {
+		for(String instrucao : instrucoes) {
+			this.instrucoes.add(instrucao);
+		}
+	}*/
+	
+	/*public String retiraPilhaInstrucoes() {
 		String instrucao;
 		instrucao = instrucoes.get(0);
 		instrucoes.remove(0);
 		return instrucao;
-	}
+	}*/
 	
-	public void execute() {
+	/*public void execute() {
 		String instrucao = retiraPilhaInstrucoes();
 		
 		int tipoInstrucao = instrucao.indexOf('R');
@@ -43,18 +53,18 @@ public class SO {
 		else {
 			leitura(instrucao);
 		}
-	}
+	}*/
 	
 	
-	public void escrita(String s) {
+	/*public void escrita(String s) {
 		String[] instrucao = s.split("-");
 		int endereco = Integer.parseInt(instrucao[0]);
 		int valor = Integer.parseInt(instrucao[2]);
 		
 		gerenciadorMemoria.escrita(endereco, valor);
-	}
+	}*/
 	
-	public void leitura(String s) {
+	/*public void leitura(String s) {
 		String[] instrucao = s.split("-");
 		int endereco = Integer.parseInt(instrucao[0]);
 		
@@ -66,5 +76,5 @@ public class SO {
 		else {
 			System.out.println("o valor lido do endereço "+instrucao[0]+" é "+ valor);
 		}	
-	}
+	}*/
 }

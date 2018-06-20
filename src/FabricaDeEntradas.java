@@ -82,7 +82,7 @@ public class FabricaDeEntradas {
 		//EXEMPLO QUE COMO USAR A FABRICA DE ENTRADAS
 		//Memoria Virtual Minima = 10
 		//Memoria Virtual Maxima = 40
-		int tamanhoDaMinhaMemoriaVirtual = 16;
+		int tamanhoDaMinhaMemoriaVirtual = tamanhoMemoriaVirtual;
 		String SUA_ENTRADA = new FabricaDeEntradas(tamanhoDaMinhaMemoriaVirtual).getNewEntrada();
 		return SUA_ENTRADA;
 	}
